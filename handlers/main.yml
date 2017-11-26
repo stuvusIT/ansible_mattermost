@@ -1,0 +1,11 @@
+- name: Reload nginx
+  service:
+    name: nginx.service
+    state: reloaded
+  listen: "restart services"
+
+- name: Reload
+  service:
+    ame: postgresql.service
+    state: reloaded
+  listen: "restart services"
