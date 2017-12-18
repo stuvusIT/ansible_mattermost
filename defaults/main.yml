@@ -16,31 +16,31 @@ mattermost_Service_ListenAddress: ":8065"
 mattermost_Service_ConnectionSecurity: ""
 mattermost_Service_TLSCertFile: ""
 mattermost_Service_TLSKeyFile: ""
-mattermost_Service_UseLetsEncrypt: "false"
+mattermost_Service_UseLetsEncrypt: false
 mattermost_Service_LetsEncryptCertificateCacheFile: "./config/letsencrypt.cache"
-mattermost_Service_Forward80To443: "false"
+mattermost_Service_Forward80To443: false
 mattermost_Service_ReadTimeout: 300
 mattermost_Service_WriteTimeout: 300
 mattermost_Service_MaximumLoginAttempts: 10
 mattermost_Service_GoroutineHealthThreshold: -1
 mattermost_Service_GoogleDeveloperKey: ""
-mattermost_Service_EnableOAuthServiceProvider: "false"
-mattermost_Service_EnableIncomingWebhooks: "true"
-mattermost_Service_EnableOutgoingWebhooks: "true"
-mattermost_Service_EnableCommands: "true"
-mattermost_Service_EnableOnlyAdminIntegrations: "true"
-mattermost_Service_EnablePostUsernameOverride: "false"
-mattermost_Service_EnablePostIconOverride: "false"
-mattermost_Service_EnableAPIv3: "true"
-mattermost_Service_EnableLinkPreviews: "false"
-mattermost_Service_EnableTesting: "false"
-mattermost_Service_EnableDeveloper: "false"
-mattermost_Service_EnableSecurityFixAlert: "true"
-mattermost_Service_EnableInsecureOutgoingConnections: "false"
+mattermost_Service_EnableOAuthServiceProvider: false
+mattermost_Service_EnableIncomingWebhooks: true
+mattermost_Service_EnableOutgoingWebhooks: true
+mattermost_Service_EnableCommands: true
+mattermost_Service_EnableOnlyAdminIntegrations: true
+mattermost_Service_EnablePostUsernameOverride: false
+mattermost_Service_EnablePostIconOverride: false
+mattermost_Service_EnableAPIv3: true
+mattermost_Service_EnableLinkPreviews: false
+mattermost_Service_EnableTesting: false
+mattermost_Service_EnableDeveloper: false
+mattermost_Service_EnableSecurityFixAlert: true
+mattermost_Service_EnableInsecureOutgoingConnections: false
 mattermost_Service_AllowedUntrustedInternalConnections: ""
-mattermost_Service_EnableMultifactorAuthentication: "false"
-mattermost_Service_EnforceMultifactorAuthentication: "false"
-mattermost_Service_EnableUserAccessTokens: "false"
+mattermost_Service_EnableMultifactorAuthentication: false
+mattermost_Service_EnforceMultifactorAuthentication: false
+mattermost_Service_EnableUserAccessTokens: false
 mattermost_Service_AllowCorsFrom: ""
 mattermost_Service_SessionLengthWebInDays: 30
 mattermost_Service_SessionLengthMobileInDays: 30
@@ -50,26 +50,26 @@ mattermost_Service_SessionIdleTimeoutInMinutes: 0
 mattermost_Service_WebsocketSecurePort: 443
 mattermost_Service_WebsocketPort: 80
 mattermost_Service_WebserverMode: "gzip"
-mattermost_Service_EnableCustomEmoji: "false"
-mattermost_Service_EnableEmojiPicker: "true"
+mattermost_Service_EnableCustomEmoji: false
+mattermost_Service_EnableEmojiPicker: true
 mattermost_Service_RestrictCustomEmojiCreation: "all"
 mattermost_Service_RestrictPostDelete: "all"
 mattermost_Service_AllowEditPost: "always"
 mattermost_Service_PostEditTimeLimit: 300
 mattermost_Service_TimeBetweenUserTypingUpdatesMilliseconds: 5000
-mattermost_Service_EnablePostSearch: "true"
-mattermost_Service_EnableUserTypingMessages: "true"
-mattermost_Service_EnableChannelViewedMessages: "true"
-mattermost_Service_EnableUserStatuses: "true"
+mattermost_Service_EnablePostSearch: true
+mattermost_Service_EnableUserTypingMessages: true
+mattermost_Service_EnableChannelViewedMessages: true
+mattermost_Service_EnableUserStatuses: true
 mattermost_Service_ClusterLogTimeoutMilliseconds: 2000
 
 mattermost_Team_SiteName: "Mattermost"
 mattermost_Team_MaxUsersPerTeam: 500
-mattermost_Team_EnableTeamCreation: "false"
-mattermost_Team_EnableUserCreation: "true"
-mattermost_Team_EnableOpenServer: "false"
-mattermost_Team_RestrictCreationToDomains: "true"
-mattermost_Team_EnableCustomBrand: "true"
+mattermost_Team_EnableTeamCreation: false
+mattermost_Team_EnableUserCreation: true
+mattermost_Team_EnableOpenServer: false
+mattermost_Team_RestrictCreationToDomains: true
+mattermost_Team_EnableCustomBrand: false
 mattermost_Team_CustomBrandText: ""
 mattermost_Team_CustomDescriptionText: ""
 mattermost_Team_RestrictDirectMessage: "any"
@@ -81,13 +81,13 @@ mattermost_Team_RestrictPrivateChannelCreation: "all"
 mattermost_Team_RestrictPublicChannelDeletion: "all"
 mattermost_Team_RestrictPrivateChannelDeletion: "all"
 mattermost_Team_RestrictPrivateChannelManageMembers: "all"
-mattermost_Team_EnableXToLeaveChannelsFromLHS: "false"
+mattermost_Team_EnableXToLeaveChannelsFromLHS: false
 mattermost_Team_UserStatusAwayTimeout: 300
 mattermost_Team_MaxChannelsPerTeam: 2000
 mattermost_Team_MaxNotificationsPerChannel: 1000
-mattermost_Team_EnableConfirmNotificationsToChannel: "true"
+mattermost_Team_EnableConfirmNotificationsToChannel: true
 mattermost_Team_TeammateNameDisplay: "username"
-mattermost_Team_ExperimentalTownSquareIsReadOnly: "false"
+mattermost_Team_ExperimentalTownSquareIsReadOnly: false
 
 mattermost_ClientRequirements_AndroidLatestVersion: ""
 mattermost_ClientRequirements_AndroidMinVersion: ""
@@ -97,38 +97,36 @@ mattermost_ClientRequirements_IosLatestVersion: ""
 mattermost_ClientRequirements_IosMinVersion: ""
 
 mattermost_Sql_DriverName: "postgres"
-#Sql_DataSource: "postgres://{{ db_user }}:{{ db_password }}@127.0.0.1:5432/{{ db_name }}?sslmode=disable&connect_timeout=10"
-#Sql_DataSource is implemented with the template mattermost-config.json.j2 - setting it here may have strange consequences
 mattermost_Sql_DataSourceReplicas: []
 mattermost_Sql_DataSourceSearchReplicas: []
 mattermost_Sql_MaxIdleConns: 20
 mattermost_Sql_MaxOpenConns: 300
-mattermost_Sql_Trace: "false"
+mattermost_Sql_Trace: false
 mattermost_Sql_AtRestEncryptKey: "jksksj85pzbomhs3ockhrzynpgh8ox34"
 mattermost_Sql_QueryTimeout: 30
 
-mattermost_Log_EnableConsole: "true"
+mattermost_Log_EnableConsole: true
 mattermost_Log_ConsoleLevel: "INFO"
-mattermost_Log_EnableFile: "true"
+mattermost_Log_EnableFile: true
 mattermost_Log_FileLevel: "INFO"
 mattermost_Log_FileFormat: ""
 mattermost_Log_FileLocation: ""
-mattermost_Log_EnableWebhookDebugging: "true"
-mattermost_Log_EnableDiagnostics: "true"
+mattermost_Log_EnableWebhookDebugging: true
+mattermost_Log_EnableDiagnostics: true
 
 mattermost_Password_MinimumLength: 5
-mattermost_Password_Lowercase: "false"
-mattermost_Password_Number: "false"
-mattermost_Password_Uppercase: "false"
-mattermost_Password_Symbol: "false"
+mattermost_Password_Lowercase: false
+mattermost_Password_Number: false
+mattermost_Password_Uppercase: false
+mattermost_Password_Symbol: false
 
-mattermost_File_EnableFileAttachments: "true"
-mattermost_File_EnableMobileUpload: "true"
-mattermost_File_EnableMobileDownload: "true"
+mattermost_File_EnableFileAttachments: true
+mattermost_File_EnableMobileUpload: true
+mattermost_File_EnableMobileDownload: true
 mattermost_File_MaxFileSize: 52428800
 mattermost_File_DriverName: "local"
 mattermost_File_Directory: "./data/"
-mattermost_File_EnablePublicLink: "false"
+mattermost_File_EnablePublicLink: false
 mattermost_File_PublicLinkSalt: "ey3hcypcwwyqun3nok4dx5k3iiaepqda"
 mattermost_File_InitialFont: "luximbi.ttf"
 mattermost_File_AmazonS3AccessKeyId: ""
@@ -136,44 +134,44 @@ mattermost_File_AmazonS3SecretAccessKey: ""
 mattermost_File_AmazonS3Bucket: ""
 mattermost_File_AmazonS3Region: "us-east-1"
 mattermost_File_AmazonS3Endpoint: "s3.amazonaws.com"
-mattermost_File_AmazonS3SSL: "true"
-mattermost_File_AmazonS3SignV2: "false"
-mattermost_File_AmazonS3SSE: "false"
-mattermost_File_AmazonS3Trace: "false"
+mattermost_File_AmazonS3SSL: true
+mattermost_File_AmazonS3SignV2: false
+mattermost_File_AmazonS3SSE: false
+mattermost_File_AmazonS3Trace: false
 
-mattermost_Email_EnableSignUpWithEmail: "true"
-mattermost_Email_EnableSignInWithEmail: "true"
-mattermost_Email_EnableSignInWithUsername: "true"
-mattermost_Email_SendEmailNotifications: "false"
-mattermost_Email_RequireEmailVerification: "false"
+mattermost_Email_EnableSignUpWithEmail: true
+mattermost_Email_EnableSignInWithEmail: true
+mattermost_Email_EnableSignInWithUsername: true
+mattermost_Email_SendEmailNotifications: false
+mattermost_Email_RequireEmailVerification: false
 mattermost_Email_FeedbackName: ""
 mattermost_Email_FeedbackEmail: ""
 mattermost_Email_FeedbackOrganization: ""
-mattermost_Email_EnableSMTPAuth: "false"
+mattermost_Email_EnableSMTPAuth: false
 mattermost_Email_SMTPUsername: ""
 mattermost_Email_SMTPPassword: ""
 mattermost_Email_SMTPServer: ""
 mattermost_Email_SMTPPort: ""
 mattermost_Email_ConnectionSecurity: ""
 mattermost_Email_InviteSalt: "du9bga69i1dknm8wnk8izgb4xm7py5gf"
-mattermost_Email_SendPushNotifications: "false"
+mattermost_Email_SendPushNotifications: false
 mattermost_Email_PushNotificationServer: ""
 mattermost_Email_PushNotificationContents: "generic"
-mattermost_Email_EnableEmailBatching: "false"
+mattermost_Email_EnableEmailBatching: false
 mattermost_Email_EmailBatchingBufferSize: 256
 mattermost_Email_EmailBatchingInterval: 30
-mattermost_Email_SkipServerCertificateVerification: "false"
+mattermost_Email_SkipServerCertificateVerification: false
 mattermost_Email_EmailNotificationContentsType: "full"
 
-mattermost_RateLimit_Enable: "false"
+mattermost_RateLimit_Enable: false
 mattermost_RateLimit_PerSec: 10
 mattermost_RateLimit_MaxBurst: 100
 mattermost_RateLimit_MemoryStoreSize: 10000
-mattermost_RateLimit_VaryByRemoteAddr: "true"
+mattermost_RateLimit_VaryByRemoteAddr: true
 mattermost_RateLimit_VaryByHeader: ""
 
-mattermost_Privacy_ShowEmailAddress: "true"
-mattermost_Privacy_ShowFullName: "true"
+mattermost_Privacy_ShowEmailAddress: true
+mattermost_Privacy_ShowFullName: true
 
 mattermost_Support_TermsOfServiceLink: "https://about.mattermost.com/default-terms/"
 mattermost_Support_PrivacyPolicyLink: "https://about.mattermost.com/default-privacy-policy/"
@@ -182,18 +180,18 @@ mattermost_Support_HelpLink: "https://about.mattermost.com/default-help/"
 mattermost_Support_ReportAProblemLink: "https://about.mattermost.com/default-report-a-problem/"
 mattermost_Support_SupportEmail: "feedback@mattermost.com"
 
-mattermost_Announcement_EnableBanner: "false"
+mattermost_Announcement_EnableBanner: false
 mattermost_Announcement_BannerText: ""
 mattermost_Announcement_BannerColor: "#f2a93b"
 mattermost_Announcement_BannerTextColor: "#333333"
-mattermost_Announcement_AllowBannerDismissal: "true"
+mattermost_Announcement_AllowBannerDismissal: true
 
-mattermost_Theme_EnableThemeSelection: "true"
+mattermost_Theme_EnableThemeSelection: true
 mattermost_Theme_DefaultTheme: "default"
-mattermost_Theme_AllowCustomThemes: "true"
+mattermost_Theme_AllowCustomThemes: true
 mattermost_Theme_AllowedThemes: []
 
-mattermost_GitLab_Enable: "false"
+mattermost_GitLab_Enable: false
 mattermost_GitLab_Secret: ""
 mattermost_GitLab_Id: ""
 mattermost_GitLab_Scope: ""
@@ -201,7 +199,7 @@ mattermost_GitLab_AuthEndpoint: ""
 mattermost_GitLab_TokenEndpoint: ""
 mattermost_GitLab_UserApiEndpoint: ""
 
-mattermost_Google_Enable: "false"
+mattermost_Google_Enable: false
 mattermost_Google_Secret: ""
 mattermost_Google_Id: ""
 mattermost_Google_Scope: "profile email"
@@ -209,7 +207,7 @@ mattermost_Google_AuthEndpoint: "https://accounts.google.com/o/oauth2/v2/auth"
 mattermost_Google_TokenEndpoint: "https://www.googleapis.com/oauth2/v4/token"
 mattermost_Google_UserApiEndpoint: "https://www.googleapis.com/plus/v1/people/me"
 
-mattermost_Office365_Enable: "false"
+mattermost_Office365_Enable: false
 mattermost_Office365_Secret: ""
 mattermost_Office365_Id: ""
 mattermost_Office365_Scope: "User.Read"
@@ -217,7 +215,7 @@ mattermost_Office365_AuthEndpoint: "https://login.microsoftonline.com/common/oau
 mattermost_Office365_TokenEndpoint: "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 mattermost_Office365_UserApiEndpoint: "https://graph.microsoft.com/v1.0/me"
 
-mattermost_Ldap_Enable: "false"
+mattermost_Ldap_Enable: false
 mattermost_Ldap_LdapServer: ""
 mattermost_Ldap_LdapPort: 389
 mattermost_Ldap_ConnectionSecurity: ""
@@ -233,22 +231,22 @@ mattermost_Ldap_NicknameAttribute: ""
 mattermost_Ldap_IdAttribute: ""
 mattermost_Ldap_PositionAttribute: ""
 mattermost_Ldap_SyncIntervalMinutes: 60
-mattermost_Ldap_SkipCertificateVerification: "false"
+mattermost_Ldap_SkipCertificateVerification: false
 mattermost_Ldap_QueryTimeout: 60
 mattermost_Ldap_MaxPageSize: 0
 mattermost_Ldap_LoginFieldName: ""
 
-mattermost_Compliance_Enable: "false"
+mattermost_Compliance_Enable: false
 mattermost_Compliance_Directory: "./data/"
-mattermost_Compliance_EnableDaily: "false"
+mattermost_Compliance_EnableDaily: false
 
 mattermost_Localization_DefaultServerLocale: "en"
 mattermost_Localization_DefaultClientLocale: "en"
 mattermost_Localization_AvailableLocales: ""
 
-mattermost_Saml_Enable: "false"
-mattermost_Saml_Verify: "true"
-mattermost_Saml_Encrypt: "true"
+mattermost_Saml_Enable: false
+mattermost_Saml_Verify: true
+mattermost_Saml_Encrypt: true
 mattermost_Saml_IdpUrl: ""
 mattermost_Saml_IdpDescriptorUrl: ""
 mattermost_Saml_AssertionConsumerServiceURL: ""
@@ -268,22 +266,22 @@ mattermost_NativeApp_AppDownloadLink: "https://about.mattermost.com/downloads/"
 mattermost_NativeApp_AndroidAppDownloadLink: "https://about.mattermost.com/mattermost-android-app/"
 mattermost_NativeApp_IosAppDownloadLink: "https://about.mattermost.com/mattermost-ios-app/"
 
-mattermost_Cluster_Enable: "false"
+mattermost_Cluster_Enable: false
 mattermost_Cluster_ClusterName: ""
 mattermost_Cluster_OverrideHostname: ""
-mattermost_Cluster_UseIpAddress: "true"
-mattermost_Cluster_UseExperimentalGossip: "false"
-mattermost_Cluster_ReadOnlyConfig: "true"
+mattermost_Cluster_UseIpAddress: true
+mattermost_Cluster_UseExperimentalGossip: false
+mattermost_Cluster_ReadOnlyConfig: true
 mattermost_Cluster_GossipPort: 8074
 mattermost_Cluster_StreamingPort: 8075
 
-mattermost_Metrics_Enable: "false"
+mattermost_Metrics_Enable: false
 mattermost_Metrics_BlockProfileRate: 0
 mattermost_Metrics_ListenAddress: ":8067"
 
 mattermost_Analytics_MaxUsersForStatistics: 2500
 
-mattermost_Webrtc_Enable: "false"
+mattermost_Webrtc_Enable: false
 mattermost_Webrtc_GatewayWebsocketUrl: ""
 mattermost_Webrtc_GatewayAdminUrl: ""
 mattermost_Webrtc_GatewayAdminSecret: ""
@@ -295,23 +293,23 @@ mattermost_Webrtc_TurnSharedKey: ""
 mattermost_Elasticsearch_ConnectionUrl: "http://dockerhost:9200"
 mattermost_Elasticsearch_Username: "elastic"
 mattermost_Elasticsearch_Password: "changeme"
-mattermost_Elasticsearch_EnableIndexing: "false"
-mattermost_Elasticsearch_EnableSearching: "false"
-mattermost_Elasticsearch_Sniff: "true"
+mattermost_Elasticsearch_EnableIndexing: false
+mattermost_Elasticsearch_EnableSearching: false
+mattermost_Elasticsearch_Sniff: true
 mattermost_Elasticsearch_PostIndexReplicas: 1
 mattermost_Elasticsearch_PostIndexShards: 1
 mattermost_Elasticsearch_AggregatePostsAfterDays: 365
 mattermost_Elasticsearch_PostsAggregatorJobStartTime: "03:00"
 mattermost_Elasticsearch_IndexPrefix: ""
 
-mattermost_DataRetention_EnableMessageDeletion: "false"
-mattermost_DataRetention_EnableFileDeletion: "false"
+mattermost_DataRetention_EnableMessageDeletion: false
+mattermost_DataRetention_EnableFileDeletion: false
 mattermost_DataRetention_MessageRetentionDays: 365
 mattermost_DataRetention_FileRetentionDays: 365
 mattermost_DataRetention_DeletionJobStartTime: "02:00"
 
-mattermost_Job_RunJobs: "true"
-mattermost_Job_RunScheduler: "true"
+mattermost_Job_RunJobs: true
+mattermost_Job_RunScheduler: true
 
-mattermost_Plugin_Enable: "false"
+mattermost_Plugin_Enable: false
 mattermost_Plugin_Plugins: {}

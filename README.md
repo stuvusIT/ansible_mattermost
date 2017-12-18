@@ -5,21 +5,64 @@ This role sets up and configures a mattermost instance.
 
 ## Requirements
 
-It needs an apt based system like ubuntu.
-
+It needs an apt based system like ubuntu. Also the stuvusIT.nginx and stuvusIT.postgresql are required.
 
 ## Role Variables
 
+| Name                     |         Required         | Default      | Description                                                                                                                                                                                            |    |    |
+|:-------------------------|:------------------------:|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---|:---|
+| `mattermost_version`     | :heavy_multiplication_x: | `4.5.0`      | Install version of mattermost                                                                                                                                                                          |    |    |
+| `mattermost_db_user`     | :heavy_multiplication_x: | `mattermost` | Name of database user                                                                                                                                                                                  |    |    |
+| `mattermost_db_password` |    :heavy_check_mark:    |              | Password for database user                                                                                                                                                                             |    |    |
+| `mattermost_db_name`     | :heavy_multiplication_x: | `mattermost` | Name of database mattermost should use                                                                                                                                                                 |    |    |
+| `mattermost_user`        | :heavy_multiplication_x: | `mattermost` | User under which the mattermost process runs                                                                                                                                                           |    |    |
+| `mattermost_enterprise`  | :heavy_multiplication_x: | `false`      | Select if the role should setup a enterprise version or the team version. If you set this variable to `true` you have to place a file named mattermost_licence under `files/{{ inventory_hostname }}/` |    |    |
+| `mattermost_teams`       | :heavy_multiplication_x: |              | Mattermost teams that should be created                                                                                                                                                                |    |    |
+| `mattermost_channels`    | :heavy_multiplication_x: |              | Mattermost Channels to be created                                                                                                                                                                      |    |    |
+| `mattermost_admins`      | :heavy_multiplication_x: |              | Mattermost admin accounts to be created                                                                                                                                                                |    |    |
+
+ mattermost_teams:
+      - name: "vorstand"
+        display_name: "Vorstand"
+        private: true
+        email: "vorstand@stuvus.uni-stuttgart.de"
+      - name: "referat-o"
+        display_name: "Referat Oeffentlichkeitsarbeit"
+        email: "referent-oeffentlichkeit@stuvus.uni-stuttgart.de"
+    mattermost_admins:
+      - firstname: Fritz
+        lastname: Otlinghaus
+        email: fritz.otlinghaus@stuvus.uni-stuttgart.de
+        locale: de
+        username: Scriptkiddi
+        password: test1234
+
+### Mattermost Teams
+| Name           |         Required         | Default | Description                  |    |    |
+|:---------------|:------------------------:|:--------|:-----------------------------|:---|:---|
+| `name`         |    :heavy_check_mark:    |         | Mattermost team name         |    |    |
+| `display_name` |    :heavy_check_mark:    |         | Mattermost display team name |    |    |
+| `email`        |    :heavy_check_mark:    |         | Mattermost team email        |    |    |
+| `private`      | :heavy_multiplication_x: | `false` | Is the team private          |    |    |
 
 
-| Name                     |         Required         | Default      | Description                                                              |    |    |
-|:-------------------------|:------------------------:|:-------------|:-------------------------------------------------------------------------|:---|:---|
-| `mattermost_version`     | :heavy_multiplication_x: | `4.5.0`      | Install version of mattermost                                            |    |    |
-| `mattermost_db_user`     | :heavy_multiplication_x: | `mattermost` | Name of database user                                                    |    |    |
-| `mattermost_db_password` |    :heavy_check_mark:    |              | Password for database user                                               |    |    |
-| `mattermost_db_name`     | :heavy_multiplication_x: | `mattermost` | Name of database mattermost should use                                   |    |    |
-| `mattermost_user`        | :heavy_multiplication_x: | `mattermost` | User under wich the mattermost process runs                              |    |    |
-| `mattermost_enterprise`  | :heavy_multiplication_x: | `false`      | Select if the role should setup a enterprise version or the team version |    |    |
+### Mattermost Channels
+| Name           |         Required         | Default | Description                              |    |    |
+|:---------------|:------------------------:|:--------|:-----------------------------------------|:---|:---|
+| `name`         |    :heavy_check_mark:    |         | Mattermost channel name                  |    |    |
+| `display_name` |    :heavy_check_mark:    |         | Mattermost display name                  |    |    |
+| `team`         |    :heavy_check_mark:    |         | Mattermost team where to add the channel |    |    |
+| `private`      | :heavy_multiplication_x: | `false` | Is the channel private                   |    |    |
+
+### Mattermost Admins
+| Name        |         Required         | Default | Description           |    |    |
+|:------------|:------------------------:|:--------|:----------------------|:---|:---|
+| `username`  |    :heavy_check_mark:    |         | Username to be used   |    |    |
+| `email`     |    :heavy_check_mark:    |         | user account mail     |    |    |
+| `password`  |    :heavy_check_mark:    |         | user account password |    |    |
+| `firstname` | :heavy_multiplication_x: |         | First name            |    |    |
+| `lastname`  | :heavy_multiplication_x: |         | First name            |    |    |
+| `locale`    | :heavy_multiplication_x: |         | Language to use       |    |    |
 
 [For all config variables see the mattermost config](https://docs.mattermost.com/administration/config-settings.html#)
 
@@ -160,4 +203,4 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 Inter
 
 ## Author Information
 
-- [Fritz Otlinghaus (Scriptkiddi)](github profile) _fritz.otlinghaus@stuvus.uni-stuttgart.de_
+- [Fritz Otlinghaus (Scriptkiddi)](https://github.com/scriptkiddi) _fritz.otlinghaus@stuvus.uni-stuttgart.de_

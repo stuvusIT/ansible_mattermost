@@ -4,7 +4,7 @@
     state: reloaded
   listen: "restart services"
 
-- name: Reload
+- name: Reload postgresql
   service:
     name: postgresql.service
     state: reloaded

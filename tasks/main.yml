@@ -1,12 +1,10 @@
 ---
 - name: Ensure database is created
-  become: true
   become_user: postgres
   postgresql_db:
     name: "{{ mattermost_db_name }}"
 
 - name: Ensure user has access to the database
-  become: yes
   become_user: postgres
   postgresql_user:
     db: "{{ mattermost_db_name }}"
@@ -14,8 +12,7 @@
     password: "{{ mattermost_db_password }}"
     priv: ALL
 
-- name: Ensure user does not have unnecessary privilege
-  become: yes
+- name: Ensure user does not have unnecessary privileges
   become_user: postgres
   postgresql_user: 
     name: "{{ mattermost_db_user }}"
@@ -26,12 +23,16 @@
     url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz'
     dest: /tmp/
   when: not mattermost_enterprise
+  become: false
+  delegate_to: localhost
 
-- name: 'Download Enterprise version binary from https://releases.mattermost.com'
+- name: 'Download enterprise version binary from https://releases.mattermost.com'
   get_url: 
     url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz'
     dest: /tmp/
   when: mattermost_enterprise
+  become: false
+  delegate_to: localhost
 
 - name: Unpack mattermost archive.
   unarchive: 
@@ -103,6 +104,9 @@
     "{{ mattermost_teams }}"
   args:
     chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr or output.rc == 0'
+  changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr or output.rc == 0'
 
 - name: Create admin users
   shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
@@ -110,3 +114,17 @@
     "{{ mattermost_admins }}"
   args:
     chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr or output.rc == 0'
+  changed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr or output.rc == 0'
+
+- name: Create channels
+  shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
+  with_items:
+    "{{ mattermost_channels }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr or output.rc == 0'
+  changed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr or output.rc == 0'
+

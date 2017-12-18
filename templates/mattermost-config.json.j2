@@ -6,31 +6,31 @@
         "ConnectionSecurity": "{{ mattermost_Service_ConnectionSecurity }}",
         "TLSCertFile": "{{ mattermost_Service_TLSCertFile }}",
         "TLSKeyFile": "{{ mattermost_Service_TLSKeyFile }}",
-        "UseLetsEncrypt": {{ mattermost_Service_UseLetsEncrypt }},
+        "UseLetsEncrypt": {{ mattermost_Service_UseLetsEncrypt | to_nice_json }},
         "LetsEncryptCertificateCacheFile": "{{ mattermost_Service_LetsEncryptCertificateCacheFile }}",
-        "Forward80To443": {{ mattermost_Service_Forward80To443 }},
+        "Forward80To443": {{ mattermost_Service_Forward80To443 | to_nice_json }},
         "ReadTimeout": {{ mattermost_Service_ReadTimeout }},
         "WriteTimeout": {{ mattermost_Service_WriteTimeout }},
         "MaximumLoginAttempts": {{ mattermost_Service_MaximumLoginAttempts }},
         "GoroutineHealthThreshold": {{ mattermost_Service_GoroutineHealthThreshold }},
         "GoogleDeveloperKey": "{{ mattermost_Service_GoogleDeveloperKey }}",
-        "EnableOAuthServiceProvider": {{ mattermost_Service_EnableOAuthServiceProvider }},
-        "EnableIncomingWebhooks": {{ mattermost_Service_EnableIncomingWebhooks }},
-        "EnableOutgoingWebhooks": {{ mattermost_Service_EnableOutgoingWebhooks }},
-        "EnableCommands": {{ mattermost_Service_EnableCommands }},
-        "EnableOnlyAdminIntegrations": {{ mattermost_Service_EnableOnlyAdminIntegrations }},
-        "EnablePostUsernameOverride": {{ mattermost_Service_EnablePostUsernameOverride }},
-        "EnablePostIconOverride": {{ mattermost_Service_EnablePostIconOverride }},
-        "EnableAPIv3": {{ mattermost_Service_EnableAPIv3 }},
-        "EnableLinkPreviews": {{ mattermost_Service_EnableLinkPreviews }},
-        "EnableTesting": {{ mattermost_Service_EnableTesting }},
-        "EnableDeveloper": {{ mattermost_Service_EnableDeveloper }},
-        "EnableSecurityFixAlert": {{ mattermost_Service_EnableSecurityFixAlert }},
-        "EnableInsecureOutgoingConnections": {{ mattermost_Service_EnableInsecureOutgoingConnections }},
+        "EnableOAuthServiceProvider": {{ mattermost_Service_EnableOAuthServiceProvider | to_nice_json }},
+        "EnableIncomingWebhooks": {{ mattermost_Service_EnableIncomingWebhooks | to_nice_json }},
+        "EnableOutgoingWebhooks": {{ mattermost_Service_EnableOutgoingWebhooks | to_nice_json }},
+        "EnableCommands": {{ mattermost_Service_EnableCommands | to_nice_json }},
+        "EnableOnlyAdminIntegrations": {{ mattermost_Service_EnableOnlyAdminIntegrations | to_nice_json }},
+        "EnablePostUsernameOverride": {{ mattermost_Service_EnablePostUsernameOverride | to_nice_json }},
+        "EnablePostIconOverride": {{ mattermost_Service_EnablePostIconOverride | to_nice_json }},
+        "EnableAPIv3": {{ mattermost_Service_EnableAPIv3 | to_nice_json }},
+        "EnableLinkPreviews": {{ mattermost_Service_EnableLinkPreviews | to_nice_json }},
+        "EnableTesting": {{ mattermost_Service_EnableTesting  | to_nice_json}},
+        "EnableDeveloper": {{ mattermost_Service_EnableDeveloper | to_nice_json }},
+        "EnableSecurityFixAlert": {{ mattermost_Service_EnableSecurityFixAlert | to_nice_json }},
+        "EnableInsecureOutgoingConnections": {{ mattermost_Service_EnableInsecureOutgoingConnections | to_nice_json }},
         "AllowedUntrustedInternalConnections": {{ mattermost_Service_AllowedUntrustedInternalConnections }}"",
-        "EnableMultifactorAuthentication": {{ mattermost_Service_EnableMultifactorAuthentication }},
-        "EnforceMultifactorAuthentication": {{ mattermost_Service_EnforceMultifactorAuthentication }},
-        "EnableUserAccessTokens": {{ mattermost_Service_EnableUserAccessTokens }},
+        "EnableMultifactorAuthentication": {{ mattermost_Service_EnableMultifactorAuthentication | to_nice_json }},
+        "EnforceMultifactorAuthentication": {{ mattermost_Service_EnforceMultifactorAuthentication | to_nice_json }},
+        "EnableUserAccessTokens": {{ mattermost_Service_EnableUserAccessTokens | to_nice_json }},
         "AllowCorsFrom": {{ mattermost_Service_AllowCorsFrom }}"",
         "SessionLengthWebInDays": {{ mattermost_Service_SessionLengthWebInDays }},
         "SessionLengthMobileInDays": {{ mattermost_Service_SessionLengthMobileInDays }},
@@ -40,27 +40,27 @@
         "WebsocketSecurePort": {{ mattermost_Service_WebsocketSecurePort }},
         "WebsocketPort": {{ mattermost_Service_WebsocketPort }},
         "WebserverMode": "{{ mattermost_Service_WebserverMode }}",
-        "EnableCustomEmoji": {{ mattermost_Service_EnableCustomEmoji }},
-        "EnableEmojiPicker": {{ mattermost_Service_EnableEmojiPicker }},
+        "EnableCustomEmoji": {{ mattermost_Service_EnableCustomEmoji | to_nice_json }},
+        "EnableEmojiPicker": {{ mattermost_Service_EnableEmojiPicker | to_nice_json }},
         "RestrictCustomEmojiCreation": "{{ mattermost_Service_RestrictCustomEmojiCreation }}",
         "RestrictPostDelete": "{{ mattermost_Service_RestrictPostDelete }}",
         "AllowEditPost": "{{ mattermost_Service_AllowEditPost }}",
         "PostEditTimeLimit": {{ mattermost_Service_PostEditTimeLimit }},
         "TimeBetweenUserTypingUpdatesMilliseconds": {{ mattermost_Service_TimeBetweenUserTypingUpdatesMilliseconds }},
-        "EnablePostSearch": {{ mattermost_Service_EnablePostSearch }},
-        "EnableUserTypingMessages": {{ mattermost_Service_EnableUserTypingMessages }},
-        "EnableChannelViewedMessages": {{ mattermost_Service_EnableChannelViewedMessages }},
-        "EnableUserStatuses": {{ mattermost_Service_EnableUserStatuses }},
+        "EnablePostSearch": {{ mattermost_Service_EnablePostSearch | to_nice_json }},
+        "EnableUserTypingMessages": {{ mattermost_Service_EnableUserTypingMessages | to_nice_json }},
+        "EnableChannelViewedMessages": {{ mattermost_Service_EnableChannelViewedMessages | to_nice_json }},
+        "EnableUserStatuses": {{ mattermost_Service_EnableUserStatuses | to_nice_json  }},
         "ClusterLogTimeoutMilliseconds": {{ mattermost_Service_ClusterLogTimeoutMilliseconds }}
     },
     "TeamSettings": {
         "SiteName": "{{ mattermost_Team_SiteName }}",
         "MaxUsersPerTeam": {{ mattermost_Team_MaxUsersPerTeam }},
-        "EnableTeamCreation": {{ mattermost_Team_EnableTeamCreation }},
-        "EnableUserCreation": {{ mattermost_Team_EnableUserCreation }},
-        "EnableOpenServer": {{ mattermost_Team_EnableOpenServer }},
+        "EnableTeamCreation": {{ mattermost_Team_EnableTeamCreation | to_nice_json }},
+        "EnableUserCreation": {{ mattermost_Team_EnableUserCreation | to_nice_json }},
+        "EnableOpenServer": {{ mattermost_Team_EnableOpenServer | to_nice_json }},
         "RestrictCreationToDomains": "{{ mattermost_Team_RestrictCreationToDomains }}",
-        "EnableCustomBrand": {{ mattermost_Team_EnableCustomBrand }},
+        "EnableCustomBrand": {{ mattermost_Team_EnableCustomBrand | to_nice_json }},
         "CustomBrandText": "{{ mattermost_Team_CustomBrandText }}",
         "CustomDescriptionText": "{{ mattermost_Team_CustomDescriptionText }}",
         "RestrictDirectMessage": "{{ mattermost_Team_RestrictDirectMessage }}",
@@ -76,9 +76,9 @@
         "UserStatusAwayTimeout": "{{ mattermost_Team_UserStatusAwayTimeout }}",
         "MaxChannelsPerTeam": {{ mattermost_Team_MaxChannelsPerTeam }},
         "MaxNotificationsPerChannel": {{ mattermost_Team_MaxNotificationsPerChannel }},
-        "EnableConfirmNotificationsToChannel": {{ mattermost_Team_EnableConfirmNotificationsToChannel }},
+        "EnableConfirmNotificationsToChannel": {{ mattermost_Team_EnableConfirmNotificationsToChannel | to_nice_json }},
         "TeammateNameDisplay": "{{ mattermost_Team_TeammateNameDisplay }}",
-        "ExperimentalTownSquareIsReadOnly": {{ mattermost_Team_ExperimentalTownSquareIsReadOnly }}
+        "ExperimentalTownSquareIsReadOnly": {{ mattermost_Team_ExperimentalTownSquareIsReadOnly | to_nice_json }}
     },
     "ClientRequirements": {
         "AndroidLatestVersion": "{{ mattermost_ClientRequirements_AndroidLatestVersion }}",
@@ -95,35 +95,35 @@
         "DataSourceSearchReplicas": {{ mattermost_Sql_DataSourceSearchReplicas }},
         "MaxIdleConns": {{ mattermost_Sql_MaxIdleConns }},
         "MaxOpenConns": {{ mattermost_Sql_MaxOpenConns }},
-        "Trace": {{ mattermost_Sql_Trace }},
+        "Trace": {{ mattermost_Sql_Trace | to_nice_json }},
         "AtRestEncryptKey": "{{ mattermost_Sql_AtRestEncryptKey }}",
         "QueryTimeout": {{ mattermost_Sql_QueryTimeout }}
     },
     "LogSettings": {
-        "EnableConsole": {{ mattermost_Log_EnableConsole }},
+        "EnableConsole": {{ mattermost_Log_EnableConsole | to_nice_json }},
         "ConsoleLevel": "{{ mattermost_Log_ConsoleLevel }}",
-        "EnableFile": {{ mattermost_Log_EnableFile }},
+        "EnableFile": {{ mattermost_Log_EnableFile | to_nice_json }},
         "FileLevel": "{{ mattermost_Log_FileLevel }}",
         "FileFormat": "{{ mattermost_Log_FileFormat }}",
         "FileLocation": "{{ mattermost_Log_FileLocation }}",
-        "EnableWebhookDebugging": {{ mattermost_Log_EnableWebhookDebugging }},
-        "EnableDiagnostics": {{ mattermost_Log_EnableDiagnostics }}
+        "EnableWebhookDebugging": {{ mattermost_Log_EnableWebhookDebugging | to_nice_json }},
+        "EnableDiagnostics": {{ mattermost_Log_EnableDiagnostics | to_nice_json }}
     },
     "PasswordSettings": {
         "MinimumLength": {{ mattermost_Password_MinimumLength }},
-        "Lowercase": {{ mattermost_Password_Lowercase }},
-        "Number": {{ mattermost_Password_Number }},
-        "Uppercase": {{ mattermost_Password_Uppercase }},
-        "Symbol": {{ mattermost_Password_Symbol }}
+        "Lowercase": {{ mattermost_Password_Lowercase | to_nice_json }},
+        "Number": {{ mattermost_Password_Number | to_nice_json }},
+        "Uppercase": {{ mattermost_Password_Uppercase | to_nice_json }},
+        "Symbol": {{ mattermost_Password_Symbol | to_nice_json }}
     },
     "FileSettings": {
-        "EnableFileAttachments": {{ mattermost_File_EnableFileAttachments }},
-        "EnableMobileUpload": {{ mattermost_File_EnableMobileUpload }},
-        "EnableMobileDownload": {{ mattermost_File_EnableMobileDownload }},
+        "EnableFileAttachments": {{ mattermost_File_EnableFileAttachments | to_nice_json }},
+        "EnableMobileUpload": {{ mattermost_File_EnableMobileUpload | to_nice_json }},
+        "EnableMobileDownload": {{ mattermost_File_EnableMobileDownload | to_nice_json }},
         "MaxFileSize": {{ mattermost_File_MaxFileSize }},
         "DriverName": "{{ mattermost_File_DriverName }}",
         "Directory": "{{ mattermost_File_Directory }}",
-        "EnablePublicLink": {{ mattermost_File_EnablePublicLink }},
+        "EnablePublicLink": {{ mattermost_File_EnablePublicLink | to_nice_json }},
         "PublicLinkSalt": "{{ mattermost_File_PublicLinkSalt }}",
         "InitialFont": "{{ mattermost_File_InitialFont }}",
         "AmazonS3AccessKeyId": "{{ mattermost_File_AmazonS3AccessKeyId }}",
@@ -131,47 +131,47 @@
         "AmazonS3Bucket": "{{ mattermost_File_AmazonS3Bucket }}",
         "AmazonS3Region": "{{ mattermost_File_AmazonS3Region }}",
         "AmazonS3Endpoint": "{{ mattermost_File_AmazonS3Endpoint }}",
-        "AmazonS3SSL": {{ mattermost_File_AmazonS3SSL }},
-        "AmazonS3SignV2": {{ mattermost_File_AmazonS3SignV2 }},
-        "AmazonS3SSE": {{ mattermost_File_AmazonS3SSE }},
-        "AmazonS3Trace": {{ mattermost_File_AmazonS3Trace }}
+        "AmazonS3SSL": {{ mattermost_File_AmazonS3SSL | to_nice_json }},
+        "AmazonS3SignV2": {{ mattermost_File_AmazonS3SignV2 | to_nice_json }},
+        "AmazonS3SSE": {{ mattermost_File_AmazonS3SSE | to_nice_json }},
+        "AmazonS3Trace": {{ mattermost_File_AmazonS3Trace | to_nice_json }}
     },
     "EmailSettings": {
-        "EnableSignUpWithEmail": {{ mattermost_Email_EnableSignUpWithEmail }},
-        "EnableSignInWithEmail": {{ mattermost_Email_EnableSignInWithEmail }},
-        "EnableSignInWithUsername": {{ mattermost_Email_EnableSignInWithUsername }},
-        "SendEmailNotifications": {{ mattermost_Email_SendEmailNotifications }},
-        "RequireEmailVerification": {{ mattermost_Email_RequireEmailVerification }},
+        "EnableSignUpWithEmail": {{ mattermost_Email_EnableSignUpWithEmail | to_nice_json }},
+        "EnableSignInWithEmail": {{ mattermost_Email_EnableSignInWithEmail | to_nice_json }},
+        "EnableSignInWithUsername": {{ mattermost_Email_EnableSignInWithUsername | to_nice_json }},
+        "SendEmailNotifications": {{ mattermost_Email_SendEmailNotifications | to_nice_json }},
+        "RequireEmailVerification": {{ mattermost_Email_RequireEmailVerification | to_nice_json }},
         "FeedbackName": "{{ mattermost_Email_FeedbackName }}",
         "FeedbackEmail": "{{ mattermost_Email_FeedbackEmail }}",
         "FeedbackOrganization": "{{ mattermost_Email_FeedbackOrganization }}",
-        "EnableSMTPAuth": {{ mattermost_Email_EnableSMTPAuth }},
+        "EnableSMTPAuth": {{ mattermost_Email_EnableSMTPAuth | to_nice_json }},
         "SMTPUsername": "{{ mattermost_Email_SMTPUsername }}",
         "SMTPPassword": "{{ mattermost_Email_SMTPPassword }}",
         "SMTPServer": "{{ mattermost_Email_SMTPServer }}",
         "SMTPPort": "{{ mattermost_Email_SMTPPort }}",
         "ConnectionSecurity": "{{ mattermost_Email_ConnectionSecurity }}",
         "InviteSalt": "{{ mattermost_Email_InviteSalt }}",
-        "SendPushNotifications": {{ mattermost_Email_SendPushNotifications }},
+        "SendPushNotifications": {{ mattermost_Email_SendPushNotifications | to_nice_json }},
         "PushNotificationServer": "{{ mattermost_Email_PushNotificationServer }}",
         "PushNotificationContents": "{{ mattermost_Email_PushNotificationContents }}",
-        "EnableEmailBatching": {{ mattermost_Email_EnableEmailBatching }},
+        "EnableEmailBatching": {{ mattermost_Email_EnableEmailBatching | to_nice_json }},
         "EmailBatchingBufferSize": {{ mattermost_Email_EmailBatchingBufferSize }},
         "EmailBatchingInterval": {{ mattermost_Email_EmailBatchingInterval }},
-        "SkipServerCertificateVerification": {{ mattermost_Email_SkipServerCertificateVerification }},
+        "SkipServerCertificateVerification": {{ mattermost_Email_SkipServerCertificateVerification | to_nice_json }},
         "EmailNotificationContentsType": "{{ mattermost_Email_EmailNotificationContentsType }}"
     },
     "RateLimitSettings": {
-        "Enable": {{ mattermost_RateLimit_Enable }},
+        "Enable": {{ mattermost_RateLimit_Enable | to_nice_json }},
         "PerSec": {{ mattermost_RateLimit_PerSec }},
         "MaxBurst": {{ mattermost_RateLimit_MaxBurst }},
         "MemoryStoreSize": {{ mattermost_RateLimit_MemoryStoreSize }},
-        "VaryByRemoteAddr": {{ mattermost_RateLimit_VaryByRemoteAddr }},
+        "VaryByRemoteAddr": {{ mattermost_RateLimit_VaryByRemoteAddr | to_nice_json }},
         "VaryByHeader": "{{ mattermost_RateLimit_VaryByHeader }}"
     },
     "PrivacySettings": {
-        "ShowEmailAddress": {{ mattermost_Privacy_ShowEmailAddress }},
-        "ShowFullName": {{ mattermost_Privacy_ShowFullName }}
+        "ShowEmailAddress": {{ mattermost_Privacy_ShowEmailAddress | to_nice_json }},
+        "ShowFullName": {{ mattermost_Privacy_ShowFullName | to_nice_json }}
     },
     "SupportSettings": {
         "TermsOfServiceLink": "{{ mattermost_Support_TermsOfServiceLink }}",
@@ -182,20 +182,20 @@
         "SupportEmail": "{{ mattermost_Support_SupportEmail }}"
     },
     "AnnouncementSettings": {
-        "EnableBanner": {{ mattermost_Announcement_EnableBanner }},
+        "EnableBanner": {{ mattermost_Announcement_EnableBanner | to_nice_json }},
         "BannerText": "{{ mattermost_Announcement_BannerText }}",
         "BannerColor": "{{ mattermost_Announcement_BannerColor }}",
         "BannerTextColor": "{{ mattermost_Announcement_BannerTextColor }}",
-        "AllowBannerDismissal": {{ mattermost_Announcement_AllowBannerDismissal }}
+        "AllowBannerDismissal": {{ mattermost_Announcement_AllowBannerDismissal | to_nice_json }}
     },
     "ThemeSettings": {
-        "EnableThemeSelection": {{ mattermost_Theme_EnableThemeSelection }},
+        "EnableThemeSelection": {{ mattermost_Theme_EnableThemeSelection | to_nice_json }},
         "DefaultTheme": "{{ mattermost_Theme_DefaultTheme }}",
-        "AllowCustomThemes": {{ mattermost_Theme_AllowCustomThemes }},
+        "AllowCustomThemes": {{ mattermost_Theme_AllowCustomThemes | to_nice_json }},
         "AllowedThemes": {{ mattermost_Theme_AllowedThemes }}
     },
     "GitLabSettings": {
-        "Enable": {{ mattermost_GitLab_Enable }},
+        "Enable": {{ mattermost_GitLab_Enable | to_nice_json }},
         "Secret": "{{ mattermost_GitLab_Secret }}",
         "Id": "{{ mattermost_GitLab_Id }}",
         "Scope": "{{ mattermost_GitLab_Scope }}",
@@ -204,7 +204,7 @@
         "UserApiEndpoint": "{{ mattermost_GitLab_UserApiEndpoint }}"
     },
     "GoogleSettings": {
-        "Enable": {{ mattermost_Google_Enable }},
+        "Enable": {{ mattermost_Google_Enable | to_nice_json }},
         "Secret": "{{ mattermost_Google_Secret }}",
         "Id": "{{ mattermost_Google_Id }}",
         "Scope": "{{ mattermost_Google_Scope }}",
@@ -213,7 +213,7 @@
         "UserApiEndpoint": "{{ mattermost_Google_UserApiEndpoint }}"
     },
     "Office365Settings": {
-        "Enable": {{ mattermost_Office365_Enable }},
+        "Enable": {{ mattermost_Office365_Enable | to_nice_json }},
         "Secret": "{{ mattermost_Office365_Secret }}",
         "Id": "{{ mattermost_Office365_Id }}",
         "Scope": "{{ mattermost_Office365_Scope }}",
@@ -222,7 +222,7 @@
         "UserApiEndpoint": "{{ mattermost_Office365_UserApiEndpoint }}"
     },
     "LdapSettings": {
-        "Enable": {{ mattermost_Ldap_Enable }},
+        "Enable": {{ mattermost_Ldap_Enable | to_nice_json }},
         "LdapServer": "{{ mattermost_Ldap_LdapServer }}",
         "LdapPort": {{ mattermost_Ldap_LdapPort }},
         "ConnectionSecurity": "{{ mattermost_Ldap_ConnectionSecurity }}",
@@ -238,15 +238,15 @@
         "IdAttribute": "{{ mattermost_Ldap_IdAttribute }}",
         "PositionAttribute": "{{ mattermost_Ldap_PositionAttribute }}",
         "SyncIntervalMinutes": {{ mattermost_Ldap_SyncIntervalMinutes }},
-        "SkipCertificateVerification": {{ mattermost_Ldap_SkipCertificateVerification }},
+        "SkipCertificateVerification": {{ mattermost_Ldap_SkipCertificateVerification | to_nice_json }},
         "QueryTimeout": {{ mattermost_Ldap_QueryTimeout }},
         "MaxPageSize": {{ mattermost_Ldap_MaxPageSize }},
         "LoginFieldName": "{{ mattermost_Ldap_LoginFieldName }}"
     },
     "ComplianceSettings": {
-        "Enable": {{ mattermost_Compliance_Enable }},
+        "Enable": {{ mattermost_Compliance_Enable | to_nice_json }},
         "Directory": "{{ mattermost_Compliance_Directory }}",
-        "EnableDaily": {{ mattermost_Compliance_EnableDaily }}
+        "EnableDaily": {{ mattermost_Compliance_EnableDaily | to_nice_json }}
     },
     "LocalizationSettings": {
         "DefaultServerLocale": "{{ mattermost_Localization_DefaultServerLocale }}",
@@ -254,9 +254,9 @@
         "AvailableLocales": "{{ mattermost_Localization_AvailableLocales }}"
     },
     "SamlSettings": {
-        "Enable": {{ mattermost_Saml_Enable }},
-        "Verify": {{ mattermost_Saml_Verify }},
-        "Encrypt": {{ mattermost_Saml_Encrypt }},
+        "Enable": {{ mattermost_Saml_Enable | to_nice_json }},
+        "Verify": {{ mattermost_Saml_Verify | to_nice_json }},
+        "Encrypt": {{ mattermost_Saml_Encrypt | to_nice_json }},
         "IdpUrl": "{{ mattermost_Saml_IdpUrl }}",
         "IdpDescriptorUrl": "{{ mattermost_Saml_IdpDescriptorUrl }}",
         "AssertionConsumerServiceURL": "{{ mattermost_Saml_AssertionConsumerServiceURL }}",
@@ -278,17 +278,17 @@
         "IosAppDownloadLink": "{{ mattermost_NativeApp_IosAppDownloadLink }}"
     },
     "ClusterSettings": {
-        "Enable": {{ mattermost_Cluster_Enable }},
+        "Enable": {{ mattermost_Cluster_Enable | to_nice_json }},
         "ClusterName": "{{ mattermost_Cluster_ClusterName }}",
         "OverrideHostname": "{{ mattermost_Cluster_OverrideHostname }}",
-        "UseIpAddress": {{ mattermost_Cluster_UseIpAddress }},
-        "UseExperimentalGossip": {{ mattermost_Cluster_UseExperimentalGossip }},
-        "ReadOnlyConfig": {{ mattermost_Cluster_ReadOnlyConfig }},
+        "UseIpAddress": {{ mattermost_Cluster_UseIpAddress | to_nice_json }},
+        "UseExperimentalGossip": {{ mattermost_Cluster_UseExperimentalGossip | to_nice_json }},
+        "ReadOnlyConfig": {{ mattermost_Cluster_ReadOnlyConfig | to_nice_json }},
         "GossipPort": {{ mattermost_Cluster_GossipPort }},
         "StreamingPort": {{ mattermost_Cluster_StreamingPort }}
     },
     "MetricsSettings": {
-        "Enable": {{ mattermost_Metrics_Enable }},
+        "Enable": {{ mattermost_Metrics_Enable | to_nice_json }},
         "BlockProfileRate": {{ mattermost_Metrics_BlockProfileRate }},
         "ListenAddress": "{{ mattermost_Metrics_ListenAddress }}"
     },
@@ -296,7 +296,7 @@
         "MaxUsersForStatistics": {{ mattermost_Analytics_MaxUsersForStatistics }}
     },
     "WebrtcSettings": {
-        "Enable": {{ mattermost_Webrtc_Enable }},
+        "Enable": {{ mattermost_Webrtc_Enable | to_nice_json }},
         "GatewayWebsocketUrl": "{{ mattermost_Webrtc_GatewayWebsocketUrl }}",
         "GatewayAdminUrl": "{{ mattermost_Webrtc_GatewayAdminUrl }}",
         "GatewayAdminSecret": "{{ mattermost_Webrtc_GatewayAdminSecret }}",
@@ -309,9 +309,9 @@
         "ConnectionUrl": "{{ mattermost_Elasticsearch_ConnectionUrl }}",
         "Username": "{{ mattermost_Elasticsearch_Username }}",
         "Password": "{{ mattermost_Elasticsearch_Password }}",
-        "EnableIndexing": {{ mattermost_Elasticsearch_EnableIndexing }},
-        "EnableSearching": {{ mattermost_Elasticsearch_EnableSearching }},
-        "Sniff": {{ mattermost_Elasticsearch_Sniff }},
+        "EnableIndexing": {{ mattermost_Elasticsearch_EnableIndexing | to_nice_json }},
+        "EnableSearching": {{ mattermost_Elasticsearch_EnableSearching | to_nice_json }},
+        "Sniff": {{ mattermost_Elasticsearch_Sniff | to_nice_json }},
         "PostIndexReplicas": {{ mattermost_Elasticsearch_PostIndexReplicas }},
         "PostIndexShards": {{ mattermost_Elasticsearch_PostIndexShards }},
         "AggregatePostsAfterDays": {{ mattermost_Elasticsearch_AggregatePostsAfterDays }},
@@ -319,18 +319,18 @@
         "IndexPrefix": "{{ mattermost_Elasticsearch_IndexPrefix }}"
     },
     "DataRetentionSettings": {
-        "EnableMessageDeletion": {{ mattermost_DataRetention_EnableMessageDeletion }},
-        "EnableFileDeletion": {{ mattermost_DataRetention_EnableFileDeletion }},
+        "EnableMessageDeletion": {{ mattermost_DataRetention_EnableMessageDeletion | to_nice_json }},
+        "EnableFileDeletion": {{ mattermost_DataRetention_EnableFileDeletion | to_nice_json }},
         "MessageRetentionDays": {{ mattermost_DataRetention_MessageRetentionDays }},
         "FileRetentionDays": {{ mattermost_DataRetention_FileRetentionDays }},
         "DeletionJobStartTime": "{{ mattermost_DataRetention_DeletionJobStartTime }}"
     },
     "JobSettings": {
-        "RunJobs": {{ mattermost_Job_RunJobs }},
-        "RunScheduler": {{ mattermost_Job_RunScheduler }}
+        "RunJobs": {{ mattermost_Job_RunJobs | to_nice_json }},
+        "RunScheduler": {{ mattermost_Job_RunScheduler | to_nice_json }}
     },
     "PluginSettings": {
-        "Enable": {{ mattermost_Plugin_Enable }},
+        "Enable": {{ mattermost_Plugin_Enable | to_nice_json }},
         "Plugins": {{ mattermost_Plugin_Plugins }}
     }
 }
