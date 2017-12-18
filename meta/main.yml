@@ -1,7 +1,7 @@
 ---
 galaxy_info:
-  author: Insert author(s) here
-  description: Insert description here
+  author: Fritz Otlinghaus
+  description: Mattermost
   company: stuvus (https://stuvus.uni-stuttgart.de)
 
   license: CC-BY-SA
@@ -17,7 +17,9 @@ galaxy_info:
         - artful
 
   galaxy_tags:
-    - Insert ansible galaxy tags here
+    - mattermost
+    - slack
+    - messaging
 
 dependencies: []
-...
+  #- { role: stuvusIT.nginx }

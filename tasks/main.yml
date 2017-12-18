@@ -21,10 +21,17 @@
     name: "{{ mattermost_db_user }}"
     role_attr_flags: NOSUPERUSER,NOCREATEDB
 
-- name: 'Download binary from https://releases.mattermost.org'
+- name: 'Download binary from https://releases.mattermost.com'
   get_url: 
     url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz'
     dest: /tmp/
+  when: not mattermost_enterprise
+
+- name: 'Download Enterprise version binary from https://releases.mattermost.com'
+  get_url: 
+    url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz'
+    dest: /tmp/
+  when: mattermost_enterprise
 
 - name: Unpack mattermost archive.
   unarchive: 
@@ -33,12 +40,31 @@
     copy: no
   args:
     creates: /opt/mattermost/bin/platform
+  when: not mattermost_enterprise
+
+- name: Unpack mattermost enterprise archive.
+  unarchive: 
+    src: /tmp/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz 
+    dest: /opt/
+    copy: no
+  args:
+    creates: /opt/mattermost/bin/platform
+  when: mattermost_enterprise
 
 - name: Create user to run mattermost service.
   user: 
     name: "{{ mattermost_user }}"
     system: yes
-    createhome: no        
+    createhome: no 
+
+- name: Place mattermost licence file
+  copy:
+    src: "{{ inventory_hostname }}/mattermost_licence"
+    dest: "{{ mattermost_Service_LicenseFileLocation }}"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: 0600       
+  when: mattermost_enterprise
 
 - name: Apply mattermost config.json template
   template:
@@ -70,3 +96,17 @@
     enabled: yes
     state: started 
   notify: "restart services"
+
+- name: Create teams
+  shell: "./platform team create --name {{ item.name }} --email {{ item.email }} --display_name {{ item.display_name }} {% if item.private | default(false) %}--private{% endif %}"
+  with_items:
+    "{{ mattermost_teams }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+
+- name: Create admin users
+  shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
+  with_items:
+    "{{ mattermost_admins }}"
+  args:
+    chdir: "/opt/mattermost/bin/"

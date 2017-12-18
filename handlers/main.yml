@@ -6,6 +6,6 @@
 
 - name: Reload
   service:
-    ame: postgresql.service
+    name: postgresql.service
     state: reloaded
   listen: "restart services"
