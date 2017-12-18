@@ -1,4 +1,4 @@
-# Role Name
+# Mattermost
 
 This role sets up and configures a mattermost instance.
 
