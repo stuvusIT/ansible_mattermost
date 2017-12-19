@@ -75,43 +75,6 @@
   changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
 
 - name: Create admin users   
-  shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
-  with_items:
-    "{{ mattermost_admins }}"
-  args:
-    chdir: "/opt/mattermost/bin/"
-  register: output
-  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr and output.rc != 0'
-  changed_when: 'output.rc == 0'
-
-- name: Create channels
-  shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
-  with_items:
-    "{{ mattermost_channels }}"
-  args:
-    chdir: "/opt/mattermost/bin/"
-  register: output
-  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr and output.rc != 0'
-  changed_when: 'output.rc == 0'
-
-- name: Enable Mattermost service
-  service:
-    name: mattermost
-    enabled: yes
-    state: started 
-  notify: "restart services"
-
-- name: Create teams
-  shell: "./platform team create --name {{ item.name }} --email {{ item.email }} --display_name {{ item.display_name }} {% if item.private | default(false) %}--private{% endif %}"
-  with_items:
-    "{{ mattermost_teams }}"
-  args:
-    chdir: "/opt/mattermost/bin/"
-  register: output
-  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc != 0'
-  changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
-
-- name: Create admin users   
   shell: "./platform user create {% if item.lastname is defined %}--lastname {{ item.lastname }}{% endif %} {% if item.firstname is defined %}--firstname {{ item.firstname }}{% endif %} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
   with_items:
     "{{ mattermost_admins }}"
