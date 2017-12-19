@@ -102,7 +102,6 @@ mattermost_Sql_DataSourceSearchReplicas: []
 mattermost_Sql_MaxIdleConns: 20
 mattermost_Sql_MaxOpenConns: 300
 mattermost_Sql_Trace: false
-mattermost_Sql_AtRestEncryptKey: "jksksj85pzbomhs3ockhrzynpgh8ox34"
 mattermost_Sql_QueryTimeout: 30
 
 mattermost_Log_EnableConsole: true
@@ -127,7 +126,6 @@ mattermost_File_MaxFileSize: 52428800
 mattermost_File_DriverName: "local"
 mattermost_File_Directory: "./data/"
 mattermost_File_EnablePublicLink: false
-mattermost_File_PublicLinkSalt: "ey3hcypcwwyqun3nok4dx5k3iiaepqda"
 mattermost_File_InitialFont: "luximbi.ttf"
 mattermost_File_AmazonS3AccessKeyId: ""
 mattermost_File_AmazonS3SecretAccessKey: ""
@@ -153,7 +151,6 @@ mattermost_Email_SMTPPassword: ""
 mattermost_Email_SMTPServer: ""
 mattermost_Email_SMTPPort: ""
 mattermost_Email_ConnectionSecurity: ""
-mattermost_Email_InviteSalt: "du9bga69i1dknm8wnk8izgb4xm7py5gf"
 mattermost_Email_SendPushNotifications: false
 mattermost_Email_PushNotificationServer: ""
 mattermost_Email_PushNotificationContents: "generic"

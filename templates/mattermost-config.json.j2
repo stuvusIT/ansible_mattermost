@@ -96,7 +96,7 @@
         "MaxIdleConns": {{ mattermost_Sql_MaxIdleConns }},
         "MaxOpenConns": {{ mattermost_Sql_MaxOpenConns }},
         "Trace": {{ mattermost_Sql_Trace | to_nice_json }},
-        "AtRestEncryptKey": "{{ mattermost_Sql_AtRestEncryptKey }}",
+        "AtRestEncryptKey": "{{ mattermost_Sql_AtRestEncryptKey | mandatory }}",
         "QueryTimeout": {{ mattermost_Sql_QueryTimeout }}
     },
     "LogSettings": {
@@ -124,7 +124,7 @@
         "DriverName": "{{ mattermost_File_DriverName }}",
         "Directory": "{{ mattermost_File_Directory }}",
         "EnablePublicLink": {{ mattermost_File_EnablePublicLink | to_nice_json }},
-        "PublicLinkSalt": "{{ mattermost_File_PublicLinkSalt }}",
+        "PublicLinkSalt": "{{ mattermost_File_PublicLinkSalt | mandatory }}",
         "InitialFont": "{{ mattermost_File_InitialFont }}",
         "AmazonS3AccessKeyId": "{{ mattermost_File_AmazonS3AccessKeyId }}",
         "AmazonS3SecretAccessKey": "{{ mattermost_File_AmazonS3SecretAccessKey }}",
@@ -151,7 +151,7 @@
         "SMTPServer": "{{ mattermost_Email_SMTPServer }}",
         "SMTPPort": "{{ mattermost_Email_SMTPPort }}",
         "ConnectionSecurity": "{{ mattermost_Email_ConnectionSecurity }}",
-        "InviteSalt": "{{ mattermost_Email_InviteSalt }}",
+        "InviteSalt": "{{ mattermost_Email_InviteSalt | mandatory }}",
         "SendPushNotifications": {{ mattermost_Email_SendPushNotifications | to_nice_json }},
         "PushNotificationServer": "{{ mattermost_Email_PushNotificationServer }}",
         "PushNotificationContents": "{{ mattermost_Email_PushNotificationContents }}",

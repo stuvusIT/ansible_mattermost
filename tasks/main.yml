@@ -21,7 +21,7 @@
 - name: 'Download binary from https://releases.mattermost.com'
   get_url: 
     url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz'
-    dest: /tmp/
+    dest: "{{ global_cache_dir | mandatory }}/"
   when: not mattermost_enterprise
   become: false
   delegate_to: localhost
@@ -29,25 +29,23 @@
 - name: 'Download enterprise version binary from https://releases.mattermost.com'
   get_url: 
     url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz'
-    dest: /tmp/
+    dest: "{{ global_cache_dir | mandatory }}/"
   when: mattermost_enterprise
   become: false
   delegate_to: localhost
 
 - name: Unpack mattermost archive.
   unarchive: 
-    src: /tmp/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz 
+    src: "{{ global_cache_dir }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz"
     dest: /opt/
-    copy: no
   args:
     creates: /opt/mattermost/bin/platform
   when: not mattermost_enterprise
 
 - name: Unpack mattermost enterprise archive.
   unarchive: 
-    src: /tmp/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz 
+    src: "{{ global_cache_dir }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz"
     dest: /opt/
-    copy: no
   args:
     creates: /opt/mattermost/bin/platform
   when: mattermost_enterprise
@@ -105,26 +103,25 @@
   args:
     chdir: "/opt/mattermost/bin/"
   register: output
-  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr or output.rc == 0'
-  changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr or output.rc == 0'
+  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
 
-- name: Create admin users
+- name: Create admin users   
   shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
   with_items:
     "{{ mattermost_admins }}"
   args:
     chdir: "/opt/mattermost/bin/"
   register: output
-  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr or output.rc == 0'
-  changed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr or output.rc == 0'
+  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: 'output.rc == 0'
 
-- name: Create channels
+- name: Create channels{{ global_cache_dir | mandatory }}/
   shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
   with_items:
     "{{ mattermost_channels }}"
   args:
     chdir: "/opt/mattermost/bin/"
   register: output
-  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr or output.rc == 0'
-  changed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr or output.rc == 0'
-
+  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: 'output.rc == 0'
