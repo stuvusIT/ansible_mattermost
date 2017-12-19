@@ -112,7 +112,7 @@
   changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
 
 - name: Create admin users   
-  shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
+  shell: "./platform user create {% if item.lastname is defined %}--lastname {{ item.lastname }}{% endif %} {% if item.firstname is defined %}--firstname {{ item.firstname }}{% endif %} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
   with_items:
     "{{ mattermost_admins }}"
   args:
