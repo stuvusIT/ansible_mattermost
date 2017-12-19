@@ -1,62 +1,61 @@
-# Mattermost
+# mattermost
 
-This role sets up and configures a mattermost instance.
+This role sets up and configures a Mattermost instance.
 
 
 ## Requirements
 
-It needs an apt based system like ubuntu. Also the stuvusIT.nginx and stuvusIT.postgresql roles are required.
+It needs an apt based system like Ubuntu. Also the [stuvusIT.nginx](https://github.com/stuvusIT/nginx) and [stuvusIT.postgresql](https://github.com/stuvusIT/postgresql) roles are required.
 
 ## Role Variables
 
-| Name                              |         Required         | Default      | Description                                                                                                                                                                                            |    |    |
-|:----------------------------------|:------------------------:|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---|:---|
-| `global_cache_dir`                |    :heavy_check_mark:    |              | cache directory to download mattermost files to                                                                                                                                                        |    |    |
-| `mattermost_version`              | :heavy_multiplication_x: | `4.5.0`      | Install version of mattermost                                                                                                                                                                          |    |    |
-| `mattermost_db_user`              | :heavy_multiplication_x: | `mattermost` | Name of database user                                                                                                                                                                                  |    |    |
-| `mattermost_db_password`          |    :heavy_check_mark:    |              | Password for database user                                                                                                                                                                             |    |    |
-| `mattermost_db_name`              | :heavy_multiplication_x: | `mattermost` | Name of database mattermost should use                                                                                                                                                                 |    |    |
-| `mattermost_user`                 | :heavy_multiplication_x: | `mattermost` | User under which the mattermost process runs                                                                                                                                                           |    |    |
-| `mattermost_enterprise`           | :heavy_multiplication_x: | `false`      | Select if the role should setup a enterprise version or the team version. If you set this variable to `true` you have to place a file named mattermost_licence under `files/{{ inventory_hostname }}/` |    |    |
-| `mattermost_teams`                | :heavy_multiplication_x: |              | Mattermost teams that should be created                                                                                                                                                                |    |    |
-| `mattermost_channels`             | :heavy_multiplication_x: |              | Mattermost Channels to be created                                                                                                                                                                      |    |    |
-| `mattermost_admins`               | :heavy_multiplication_x: |              | Mattermost admin accounts to be created                                                                                                                                                                |    |    |
-| `mattermost_Sql_AtRestEncryptKey` |    :heavy_check_mark:    |              | Encrypt key used for sql. Please generate.                                                                                                                                                             |    |    |
-| `mattermost_File_PublicLinkSalt`  |    :heavy_check_mark:    |              | Public Link Salt, generate and keep secret                                                                                                                                                             |    |    |
-| `mattermost_Email_InviteSalt`     |    :heavy_check_mark:    |              | Email Invite Salt, generate and keep secret                                                                                                                                                            |    |    |
+| Name                              | Required                 | Default      | Description                                                                                                                                                                                            |
+|:----------------------------------|:------------------------:|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `global_cache_dir`                | :heavy_check_mark:       |              | Cache directory to download Mattermost files to                                                                                                                                                        |
+| `mattermost_version`              | :heavy_multiplication_x: | `4.5.0`      | Install version of Mattermost                                                                                                                                                                          |
+| `mattermost_db_user`              | :heavy_multiplication_x: | `mattermost` | Name of the database user                                                                                                                                                                                  |
+| `mattermost_db_password`          | :heavy_check_mark:       |              | Password for database user                                                                                                                                                                             |
+| `mattermost_db_name`              | :heavy_multiplication_x: | `mattermost` | Name of database Mattermost should use                                                                                                                                                                 |
+| `mattermost_user`                 | :heavy_multiplication_x: | `mattermost` | User under which the Mattermost process runs                                                                                                                                                           |
+| `mattermost_enterprise`           | :heavy_multiplication_x: | `false`      | Select if the role should setup a enterprise version or the team version. If you set this variable to `true`, you have to place a file named mattermost_licence under `files/{{ inventory_hostname }}/` |
+| `mattermost_teams`                | :heavy_multiplication_x: |              | Mattermost teams that should be created                                                                                                                                                                |
+| `mattermost_channels`             | :heavy_multiplication_x: |              | Mattermost Channels to be created                                                                                                                                                                      |
+| `mattermost_admins`               | :heavy_multiplication_x: |              | Mattermost admin accounts to be created                                                                                                                                                                |
+| `mattermost_Sql_AtRestEncryptKey` | :heavy_ check_mark:      |              | Encrypt key used for sql. Please generate an alphanumeric string with 32 characters.                                                                                                                                                             |
+| `mattermost_File_PublicLinkSalt`  | :heavy_check_mark:       |              | Public link salt, generate an alphanumeric string with 32 characters and keep secret                                                                                                                                                             |
+| `mattermost_Email_InviteSalt`     | :heavy_check_mark:       |              | Email Invite salt, generate an alphanumeric string with 32 characters and keep secret                                                                                                                                                            |
 
 
 ### Mattermost Teams
-| Name           |         Required         | Default | Description                  |    |    |
-|:---------------|:------------------------:|:--------|:-----------------------------|:---|:---|
-| `name`         |    :heavy_check_mark:    |         | Mattermost team name         |    |    |
-| `display_name` |    :heavy_check_mark:    |         | Mattermost display team name |    |    |
-| `email`        |    :heavy_check_mark:    |         | Mattermost team email        |    |    |
-| `private`      | :heavy_multiplication_x: | `false` | Is the team private          |    |    |
+| Name           |         Required         | Default | Description                  |
+|:---------------|:------------------------:|:--------|:-----------------------------|
+| `name`         |    :heavy_check_mark:    |         | Mattermost team name         |
+| `display_name` |    :heavy_check_mark:    |         | Mattermost display team name |
+| `email`        |    :heavy_check_mark:    |         | Mattermost team email        |
+| `private`      | :heavy_multiplication_x: | `false` | `true` to set the team to private, otherwise use `false` to make the team public          |
 
 
 ### Mattermost Channels
-| Name           |         Required         | Default | Description                              |    |    |
-|:---------------|:------------------------:|:--------|:-----------------------------------------|:---|:---|
-| `name`         |    :heavy_check_mark:    |         | Mattermost channel name                  |    |    |
-| `display_name` |    :heavy_check_mark:    |         | Mattermost display name                  |    |    |
-| `team`         |    :heavy_check_mark:    |         | Mattermost team where to add the channel |    |    |
-| `private`      | :heavy_multiplication_x: | `false` | Is the channel private                   |    |    |
+| Name           | Required                 | Default | Description                              |
+|:---------------|:------------------------:|:--------|:-----------------------------------------|
+| `name`         | :heavy_check_mark:       |         | Mattermost channel name                  |
+| `display_name` | :heavy_check_mark:       |         | Mattermost display name                  |
+| `team`         | :heavy_check_mark:       |         | Mattermost team where to add the channel |
+| `private`      | :heavy_multiplication_x: | `false` | `true` to set the channel to private, otherwise use `false` to make the channel public                   |
 
 ### Mattermost Admins
-| Name        |         Required         | Default | Description           |    |    |
-|:------------|:------------------------:|:--------|:----------------------|:---|:---|
-| `username`  |    :heavy_check_mark:    |         | Username to be used   |    |    |
-| `email`     |    :heavy_check_mark:    |         | user account mail     |    |    |
-| `password`  |    :heavy_check_mark:    |         | user account password |    |    |
-| `firstname` | :heavy_multiplication_x: |         | First name            |    |    |
-| `lastname`  | :heavy_multiplication_x: |         | First name            |    |    |
-| `locale`    | :heavy_multiplication_x: |         | Language to use       |    |    |
+| Name        |         Required         | Default | Description           |
+|:------------|:------------------------:|:--------|:----------------------|
+| `username`  |    :heavy_check_mark:    |         | Username to be used   |
+| `email`     |    :heavy_check_mark:    |         | user account mail     |
+| `password`  |    :heavy_check_mark:    |         | user account password |
+| `firstname` | :heavy_multiplication_x: |         | First name            |
+| `lastname`  | :heavy_multiplication_x: |         | First name            |
+| `locale`    | :heavy_multiplication_x: |         | Language to use       |
 
 [For all config variables see the mattermost config](https://docs.mattermost.com/administration/config-settings.html#)
 
 ## Example Playbook
-This will follow after testing
 
 ```yml
 served_domains:

@@ -1,3 +1,4 @@
+---
 - name: Ensure database is created
   become_user: postgres
   postgresql_db:

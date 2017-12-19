@@ -1,3 +1,4 @@
+---
 - name: 'Download binary from https://releases.mattermost.com'
   get_url: 
     url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz'
@@ -14,7 +15,7 @@
   become: false
   delegate_to: localhost
 
-- name: Unpack mattermost archive.
+- name: Unpack Mattermost archive
   unarchive: 
     src: "{{ global_cache_dir }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz"
     dest: /opt/
@@ -22,7 +23,7 @@
     creates: /opt/mattermost/bin/platform
   when: not mattermost_enterprise
 
-- name: Unpack mattermost enterprise archive.
+- name: Unpack Mattermost enterprise archive
   unarchive: 
     src: "{{ global_cache_dir }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz"
     dest: /opt/
@@ -30,7 +31,7 @@
     creates: /opt/mattermost/bin/platform
   when: mattermost_enterprise
 
-- name: Create user to run mattermost service.
+- name: Create user to run Mattermost service
   user: 
     name: "{{ mattermost_user }}"
     system: yes

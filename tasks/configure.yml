@@ -1,4 +1,5 @@
-- name: Place mattermost licence file
+---
+- name: Place Mattermost licence file
   copy:
     src: "{{ inventory_hostname }}/mattermost_licence"
     dest: "{{ mattermost_Service_LicenseFileLocation }}"
@@ -7,15 +8,15 @@
     mode: 0600       
   when: mattermost_enterprise
 
-- name: Apply mattermost config.json template
+- name: Apply Mattermost config.json template
   template:
     src: mattermost-config.json.j2
     dest: /opt/mattermost/config/config.json
     owner: "{{ mattermost_user }}"
     group: "{{ mattermost_user }}"
     mode: 0644
-  
-- name: Change mattermost directory permissions
+
+- name: Change Mattermost directory permissions
   file:
     path: /opt/mattermost
     state: directory
@@ -23,14 +24,7 @@
     group: "{{ mattermost_user }}"
     recurse: yes
 
-- name: Create mattermost systemd service 
-  template:
-    src: systemd.j2
-    dest: /etc/systemd/system/mattermost.service
-    owner: root
-    group: root
-    mode: 0664
-- name: Place mattermost licence file
+- name: Place Mattermost licence file
   copy:
     src: "{{ inventory_hostname }}/mattermost_licence"
     dest: "{{ mattermost_Service_LicenseFileLocation }}"
@@ -39,7 +33,7 @@
     mode: 0600       
   when: mattermost_enterprise
 
-- name: Apply mattermost config.json template
+- name: Apply Mattermost config.json template
   template:
     src: mattermost-config.json.j2
     dest: /opt/mattermost/config/config.json
@@ -47,7 +41,7 @@
     group: "{{ mattermost_user }}"
     mode: 0644
   
-- name: Change mattermost directory permissions
+- name: Change Mattermost directory permissions
   file:
     path: /opt/mattermost
     state: directory
@@ -99,6 +93,7 @@
   register: output
   failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr and output.rc != 0'
   changed_when: 'output.rc == 0'
+
 - name: Enable Mattermost service
   service:
     name: mattermost
