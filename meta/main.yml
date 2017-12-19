@@ -22,5 +22,5 @@ galaxy_info:
     - messaging
 
 dependencies: []
-  - { role: stuvusIT.nginx }
-  - { role: stuvusIT.postgresql }
+#  - { role: stuvusIT.nginx }
+#  - { role: stuvusIT.postgresql }
