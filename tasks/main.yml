@@ -116,7 +116,7 @@
   failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr and output.rc != 0'
   changed_when: 'output.rc == 0'
 
-- name: Create channels{{ global_cache_dir | mandatory }}/
+- name: Create channels
   shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
   with_items:
     "{{ mattermost_channels }}"
