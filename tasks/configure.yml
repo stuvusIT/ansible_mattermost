@@ -1,0 +1,137 @@
+- name: Place mattermost licence file
+  copy:
+    src: "{{ inventory_hostname }}/mattermost_licence"
+    dest: "{{ mattermost_Service_LicenseFileLocation }}"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: 0600       
+  when: mattermost_enterprise
+
+- name: Apply mattermost config.json template
+  template:
+    src: mattermost-config.json.j2
+    dest: /opt/mattermost/config/config.json
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: 0644
+  
+- name: Change mattermost directory permissions
+  file:
+    path: /opt/mattermost
+    state: directory
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    recurse: yes
+
+- name: Create mattermost systemd service 
+  template:
+    src: systemd.j2
+    dest: /etc/systemd/system/mattermost.service
+    owner: root
+    group: root
+    mode: 0664
+- name: Place mattermost licence file
+  copy:
+    src: "{{ inventory_hostname }}/mattermost_licence"
+    dest: "{{ mattermost_Service_LicenseFileLocation }}"
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: 0600       
+  when: mattermost_enterprise
+
+- name: Apply mattermost config.json template
+  template:
+    src: mattermost-config.json.j2
+    dest: /opt/mattermost/config/config.json
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    mode: 0644
+  
+- name: Change mattermost directory permissions
+  file:
+    path: /opt/mattermost
+    state: directory
+    owner: "{{ mattermost_user }}"
+    group: "{{ mattermost_user }}"
+    recurse: yes
+
+- name: Create mattermost systemd service 
+  template:
+    src: systemd.j2
+    dest: /etc/systemd/system/mattermost.service
+    owner: root
+    group: root
+    mode: 0664
+
+- name: Enable Mattermost service
+  service:
+    name: mattermost
+    enabled: yes
+    state: started 
+  notify: "restart services"
+
+- name: Create teams
+  shell: "./platform team create --name {{ item.name }} --email {{ item.email }} --display_name {{ item.display_name }} {% if item.private | default(false) %}--private{% endif %}"
+  with_items:
+    "{{ mattermost_teams }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
+
+- name: Create admin users   
+  shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
+  with_items:
+    "{{ mattermost_admins }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: 'output.rc == 0'
+
+- name: Create channels
+  shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
+  with_items:
+    "{{ mattermost_channels }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: 'output.rc == 0'
+- name: Enable Mattermost service
+  service:
+    name: mattermost
+    enabled: yes
+    state: started 
+  notify: "restart services"
+
+- name: Create teams
+  shell: "./platform team create --name {{ item.name }} --email {{ item.email }} --display_name {{ item.display_name }} {% if item.private | default(false) %}--private{% endif %}"
+  with_items:
+    "{{ mattermost_teams }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
+
+- name: Create admin users   
+  shell: "./platform user create --lastname {{ item.lastname }} --firstname {{ item.firstname }} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
+  with_items:
+    "{{ mattermost_admins }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: 'output.rc == 0'
+
+- name: Create channels
+  shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
+  with_items:
+    "{{ mattermost_channels }}"
+  args:
+    chdir: "/opt/mattermost/bin/"
+  register: output
+  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr and output.rc != 0'
+  changed_when: 'output.rc == 0'
