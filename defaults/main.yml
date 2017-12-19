@@ -8,6 +8,9 @@ mattermost_db_user: mattermost
 mattermost_db_name: mattermost
 mattermost_user: mattermost
 mattermost_enterprise: false
+mattermost_teams: []
+mattermost_channels: []
+mattermost_admins: []
 # MATTERMOST config.json SETTINGS
 
 mattermost_Service_SiteURL: ""
