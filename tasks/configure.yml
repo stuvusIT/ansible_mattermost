@@ -71,7 +71,7 @@
   args:
     chdir: "/opt/mattermost/bin/"
   register: output
-  failed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc != 0'
+  failed_when: '"SqlTeamStore.Save" not in output.stderr and output.rc != 0'
   changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
 
 - name: Create admin users   
@@ -81,7 +81,7 @@
   args:
     chdir: "/opt/mattermost/bin/"
   register: output
-  failed_when: '"store.sql_user.save.username_exists.app_error" not in output.stderr and output.rc != 0'
+  failed_when: '"SqlUserStore.Save" not in output.stderr and output.rc != 0'
   changed_when: 'output.rc == 0'
 
 - name: Create channels
@@ -91,5 +91,5 @@
   args:
     chdir: "/opt/mattermost/bin/"
   register: output
-  failed_when: '"store.sql_channel.save_channel.exists.app_error" not in output.stderr and output.rc != 0'
+  failed_when: '"SqlChannelStore.Save" not in output.stderr and output.rc != 0'
   changed_when: 'output.rc == 0'
