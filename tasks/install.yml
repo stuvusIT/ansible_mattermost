@@ -36,3 +36,11 @@
     name: "{{ mattermost_user }}"
     system: yes
     createhome: no 
+
+- name: Create version file
+  copy:
+    content: "{{ mattermost_version }}"
+    dest: /opt/mattermost/version
+    force: yes
+    owner: "{{ mattermost_user }}"
+    mode: 0644
