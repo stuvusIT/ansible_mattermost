@@ -1,0 +1,75 @@
+---
+# Creates a folder /opt/mattermost-updated/mattermost with the updated version
+
+- name: Remove a previously leaked mattermost-displaced folder
+  file:
+    path: /opt/mattermost-displaced
+    state: absent
+
+- name: Remove a previously leaked mattermost-updated folder
+  file:
+    path: /opt/mattermost-updated
+    state: absent
+
+- name: Create the displaced folder
+  file:
+    path: /opt/mattermost-displaced
+    state: directory
+
+- set_fact:
+    mattermost_archive_name: mattermost-team-{{ mattermost_version }}
+  when: not mattermost_enterprise
+
+- set_fact:
+    mattermost_archive_name: mattermost-{{ mattermost_version }}
+  when: mattermost_enterprise
+
+- name: 'Download binary from https://releases.mattermost.com'
+  get_url:
+    url: 'https://releases.mattermost.com/{{ mattermost_version }}/{{ mattermost_archive_name }}-linux-amd64.tar.gz'
+    dest: "{{ global_cache_dir | mandatory }}/"
+  become: false
+  delegate_to: localhost
+
+- name: Unpack Mattermost archive
+  unarchive:
+    src: "{{ global_cache_dir }}/{{ mattermost_archive_name }}-linux-amd64.tar.gz"
+    dest: /opt/mattermost-displaced/
+  args:
+
+- name: Create version file
+  copy:
+    content: "{{ mattermost_version }}"
+    dest: /opt/mattermost-displaced/mattermost/version
+    force: yes
+    owner: "{{ mattermost_user }}"
+    mode: 0644
+
+- name: Make sure the mattermost folder exists
+  file:
+    path: /opt/mattermost
+    state: directory
+
+- name: Create folders to synchronize
+  file:
+    path: /opt/{{ item[0] }}/{{ item[1] }}
+    state: directory
+    recurse: yes
+  with_nested:
+    - - mattermost
+      - mattermost-displaced/mattermost
+    - '{{ mattermost_preserve_on_update }}'
+
+# We stop the service before synchronizing such that no data is changed after synchronization
+- name: Stop mattermost service
+  service:
+    name: mattermost
+    enabled: yes
+    state: stopped
+
+- name: Synchronize the preserved folders
+  command: rsync -aI /opt/mattermost/{{ item }}/ /opt/mattermost-displaced/mattermost/{{ item }}
+  with_items: '{{ mattermost_preserve_on_update }}'
+
+- name: Indicate that the update finished successfully
+  command: mv /opt/mattermost-displaced /opt/mattermost-updated

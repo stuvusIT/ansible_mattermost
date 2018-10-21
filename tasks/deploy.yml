@@ -1,0 +1,16 @@
+---
+# Deploys /opt/mattermost-updated/mattermost to /opt/mattermost
+# Attention: This doesn't check if the (valid) updated version exists
+
+- name: Remove the old mattermost folder
+  file:
+    path: /opt/mattermost
+    state: absent
+
+- name: Move the displaced mattermost folder into its place
+  command: mv /opt/mattermost-updated/mattermost /opt/mattermost
+
+- name: Remove the mattermost-updated folder
+  file:
+    path: /opt/mattermost-updated
+    state: absent

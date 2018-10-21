@@ -1,46 +1,25 @@
 ---
-- name: 'Download binary from https://releases.mattermost.com'
-  get_url: 
-    url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz'
-    dest: "{{ global_cache_dir | mandatory }}/"
-  when: not mattermost_enterprise
-  become: false
-  delegate_to: localhost
 
-- name: 'Download enterprise version binary from https://releases.mattermost.com'
-  get_url: 
-    url: 'https://releases.mattermost.com/{{ mattermost_version }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz'
-    dest: "{{ global_cache_dir | mandatory }}/"
-  when: mattermost_enterprise
-  become: false
-  delegate_to: localhost
+- name: Check if a previous update wasn't deployed
+  stat:
+    path: /opt/mattermost-updated/mattermost
+  register: mattermost_updated_stat
 
-- name: Unpack Mattermost archive
-  unarchive: 
-    src: "{{ global_cache_dir }}/mattermost-team-{{ mattermost_version }}-linux-amd64.tar.gz"
-    dest: /opt/
-  args:
-    creates: /opt/mattermost/bin/platform
-  when: not mattermost_enterprise
+- import_tasks: deploy.yml
+  when: mattermost_updated_stat.stat.exists
 
-- name: Unpack Mattermost enterprise archive
-  unarchive: 
-    src: "{{ global_cache_dir }}/mattermost-{{ mattermost_version }}-linux-amd64.tar.gz"
-    dest: /opt/
-  args:
-    creates: /opt/mattermost/bin/platform
-  when: mattermost_enterprise
+- name: Check if a previous mattermost version exists
+  stat:
+    path: /opt/mattermost/version
+  register: previous_mattermost_version_stat
 
-- name: Create user to run Mattermost service
-  user: 
-    name: "{{ mattermost_user }}"
-    system: yes
-    createhome: no 
+- name: Get the previous mattermost version
+  slurp:
+    src: /opt/mattermost/version
+  register: previous_mattermost_version
+  when: previous_mattermost_version_stat.stat.exists
 
-- name: Create version file
-  copy:
-    content: "{{ mattermost_version }}"
-    dest: /opt/mattermost/version
-    force: yes
-    owner: "{{ mattermost_user }}"
-    mode: 0644
+- block:
+  - import_tasks: update.yml
+  - import_tasks: deploy.yml
+  when: not previous_mattermost_version_stat.stat.exists or previous_mattermost_version['content'] | b64decode != mattermost_version
