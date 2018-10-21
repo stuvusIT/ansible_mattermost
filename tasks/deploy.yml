@@ -1,0 +1,33 @@
+---
+
+- block:
+
+  - name: Create folders to synchronize
+    file:
+      path: /opt/mattermost-versions/{{ mattermost_version }}/{{ item }}
+      state: directory
+      recurse: yes
+    with_items: '{{ mattermost_preserve_on_update }}'
+
+  # We stop the service before synchronizing such that no data is changed after synchronization
+  - name: Stop mattermost service
+    service:
+      name: mattermost
+      enabled: yes
+      state: stopped
+
+  - name: Synchronize the preserved folders
+    command: rsync -aI /opt/mattermost/{{ item }}/ /opt/mattermost-versions/{{ mattermost_version }}/{{ item }}
+    with_items: '{{ mattermost_preserve_on_update }}'
+
+  when: mattermost_previous_version is defined
+
+- name: Set the symlink to the installed mattermost version
+  file:
+    src: /opt/mattermost-versions/{{ mattermost_version }}
+    dest: /tmp/mattermost-symlink
+    state: link
+
+# mv is atomic and we want the activation of the new version to be atomic
+- name: Move the symlink into its place
+  command: mv -Tf /tmp/mattermost-symlink /opt/mattermost

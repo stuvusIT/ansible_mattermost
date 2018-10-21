@@ -1,4 +1,11 @@
 ---
+
+- name: Create user to run Mattermost service
+  user:
+    name: "{{ mattermost_user }}"
+    system: yes
+    createhome: no
+
 - name: Place Mattermost licence file
   copy:
     src: "{{ inventory_hostname }}/mattermost_licence"

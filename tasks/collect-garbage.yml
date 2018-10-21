@@ -1,0 +1,15 @@
+---
+
+- name: Find old mattermost versions
+  find:
+    paths: /opt/mattermost-versions
+    file_type: directory
+    excludes: '{{ mattermost_version }}'
+    recurse: no
+  register: mattermost_old_versions
+
+- name: Garbage collect old mattermost versions
+  file:
+    path: '{{ item.path }}'
+    state: absent
+  with_items: '{{ mattermost_old_versions.files }}'
