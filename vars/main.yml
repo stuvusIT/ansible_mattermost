@@ -1,0 +1,7 @@
+---
+
+mattermost_preserve_on_update:
+  - config
+  - logs
+  - bin/plugins
+  - bin/data
