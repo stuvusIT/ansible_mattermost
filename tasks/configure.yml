@@ -3,8 +3,6 @@
   copy:
     src: "{{ inventory_hostname }}/mattermost_licence"
     dest: "{{ mattermost_Service_LicenseFileLocation }}"
-    owner: "{{ mattermost_user }}"
-    group: "{{ mattermost_user }}"
     mode: 0600       
   when: mattermost_enterprise
 
@@ -12,35 +10,8 @@
   template:
     src: mattermost-config.json.j2
     dest: /opt/mattermost/config/config.json
-    owner: "{{ mattermost_user }}"
-    group: "{{ mattermost_user }}"
     mode: 0644
 
-- name: Change Mattermost directory permissions
-  file:
-    path: /opt/mattermost
-    state: directory
-    owner: "{{ mattermost_user }}"
-    group: "{{ mattermost_user }}"
-    recurse: yes
-
-- name: Place Mattermost licence file
-  copy:
-    src: "{{ inventory_hostname }}/mattermost_licence"
-    dest: "{{ mattermost_Service_LicenseFileLocation }}"
-    owner: "{{ mattermost_user }}"
-    group: "{{ mattermost_user }}"
-    mode: 0600       
-  when: mattermost_enterprise
-
-- name: Apply Mattermost config.json template
-  template:
-    src: mattermost-config.json.j2
-    dest: /opt/mattermost/config/config.json
-    owner: "{{ mattermost_user }}"
-    group: "{{ mattermost_user }}"
-    mode: 0644
-  
 - name: Change Mattermost directory permissions
   file:
     path: /opt/mattermost
