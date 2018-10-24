@@ -7,6 +7,12 @@ This role sets up and configures a Mattermost instance.
 
 It needs an apt based system like Ubuntu. Also the [stuvusIT.nginx](https://github.com/stuvusIT/nginx) and [stuvusIT.postgresql](https://github.com/stuvusIT/postgresql) roles are required.
 
+## Updating
+
+This role can not only install Mattermost, but also update it to a new version.
+To do so, just edit the role variable `mattermost_version` and run the role.
+Hereby it doesn't matter if the new version is higher or lower than the previous version.
+
 ## Role Variables
 
 | Name                              | Required                 | Default      | Description                                                                                                                                                                                            |
