@@ -1,0 +1,30 @@
+---
+# Creates a folder /opt/mattermost/{{ mattermost_version }} with the desired version
+
+- set_fact:
+    mattermost_archive_name: mattermost-team-{{ mattermost_version }}
+  when: not mattermost_enterprise
+
+- set_fact:
+    mattermost_archive_name: mattermost-{{ mattermost_version }}
+  when: mattermost_enterprise
+
+- name: Download binary from https://releases.mattermost.com
+  get_url:
+    url: https://releases.mattermost.com/{{ mattermost_version }}/{{ mattermost_archive_name }}-linux-amd64.tar.gz
+    dest: "{{ global_cache_dir | mandatory }}/"
+  become: false
+  delegate_to: localhost
+
+- name: Unpack Mattermost archive
+  unarchive:
+    src: '{{ global_cache_dir }}/{{ mattermost_archive_name }}-linux-amd64.tar.gz'
+    dest: /tmp
+
+- name: Make sure the mattermost-versions folder exists
+  file:
+    path: /opt/mattermost-versions
+    state: directory
+
+- name: Move updated mattermost version into its place
+  command: mv /tmp/mattermost /opt/mattermost-versions/{{ mattermost_version }}
