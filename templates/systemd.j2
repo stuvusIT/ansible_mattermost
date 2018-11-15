@@ -4,9 +4,9 @@ After=syslog.target network.target postgresql.service
 
 [Service]
 Type=simple
-WorkingDirectory=/opt/mattermost/{{ mattermost_version }}/bin
+WorkingDirectory=/opt/mattermost/bin
 User={{ mattermost_user }}
-ExecStart=/opt/mattermost/{{ mattermost_version }}/bin/platform
+ExecStart=/opt/mattermost/bin/platform
 PIDFile=/var/spool/mattermost/pid/master.pid
 
 [Install]
