@@ -3,7 +3,7 @@
 
 # High Level Vars
 
-mattermost_version: 4.5.0
+mattermost_version: 5.16.3
 mattermost_db_user: mattermost
 mattermost_db_name: mattermost
 mattermost_user: mattermost
