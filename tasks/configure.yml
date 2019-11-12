@@ -43,7 +43,7 @@
   notify: "restart services"
 
 - name: Create teams
-  shell: "./platform team create --name {{ item.name }} --email {{ item.email }} --display_name {{ item.display_name }} {% if item.private | default(false) %}--private{% endif %}"
+  shell: "./mattermost team create --name {{ item.name }} --email {{ item.email }} --display_name {{ item.display_name }} {% if item.private | default(false) %}--private{% endif %}"
   with_items:
     "{{ mattermost_teams }}"
   args:
@@ -53,7 +53,7 @@
   changed_when: '"store.sql_team.save.domain_exists.app_error" not in output.stderr and output.rc == 0'
 
 - name: Create admin users
-  shell: "./platform user create {% if item.lastname is defined %}--lastname {{ item.lastname }}{% endif %} {% if item.firstname is defined %}--firstname {{ item.firstname }}{% endif %} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
+  shell: "./mattermost user create {% if item.lastname is defined %}--lastname {{ item.lastname }}{% endif %} {% if item.firstname is defined %}--firstname {{ item.firstname }}{% endif %} --email {{ item.email }} --password {{ item.password }} --username {{ item.username }} --system_admin"
   with_items:
     "{{ mattermost_admins }}"
   args:
@@ -64,7 +64,7 @@
   no_log: True
 
 - name: Create channels
-  shell: "./platform channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
+  shell: "./mattermost channel create --name {{ item.name }} --display_name {{ item.display_name }} --team {{ item.team }} {% if item.private | default(false) %}--private{% endif %}"
   with_items:
     "{{ mattermost_channels }}"
   args:
