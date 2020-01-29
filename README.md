@@ -65,7 +65,7 @@ Hereby it doesn't matter if the new version is higher or lower than the previous
 
 ```yml
 served_domains:
-      - domains: 
+      - domains:
           - mattermost
         default_server: true
         https: false
