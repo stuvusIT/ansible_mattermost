@@ -10,7 +10,7 @@
   copy:
     src: "{{ inventory_hostname }}/mattermost_licence"
     dest: "{{ mattermost_Service_LicenseFileLocation }}"
-    mode: 0600       
+    mode: 0600
   when: mattermost_enterprise
 
 - name: Apply Mattermost config.json template
@@ -27,7 +27,7 @@
     group: "{{ mattermost_user }}"
     recurse: yes
 
-- name: Create mattermost systemd service 
+- name: Create mattermost systemd service
   template:
     src: systemd.j2
     dest: /etc/systemd/system/mattermost.service
@@ -39,7 +39,7 @@
   service:
     name: mattermost
     enabled: yes
-    state: started 
+    state: started
   notify: "restart services"
 
 - name: Create teams
